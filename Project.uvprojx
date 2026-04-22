@@ -10,6 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -335,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\User;.\Library</IncludePath>
+              <IncludePath>.\Start;.\User;.\Library;.\Hardware;.\System</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -651,6 +652,28 @@
         </Group>
         <Group>
           <GroupName>Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>Motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>Motor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Motor.h</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\PWM.h</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>User</GroupName>
