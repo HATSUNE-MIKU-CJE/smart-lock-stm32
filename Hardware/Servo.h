@@ -1,7 +1,14 @@
+/**
+  ******************************************************************************
+  * @file    Servo.h
+  * @brief   舵机角度控制驱动对外接口
+  ******************************************************************************
+  */
+
 #ifndef __SERVO_H
 #define __SERVO_H
 
-void Servo_Init(void);
-void Servo_SetAngle(float Angle);
+void Servo_Init(void);          /**< 舵机初始化（内部初始化PWM） */
+void Servo_SetAngle(float Angle); /**< 设置舵机角度（0~180°） */
 
 #endif 

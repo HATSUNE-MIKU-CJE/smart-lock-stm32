@@ -35,6 +35,7 @@
 ".\objects\fingerprint.o"
 ".\objects\voice.o"
 ".\objects\servo.o"
+".\objects\password.o"
 ".\objects\main.o"
 ".\objects\stm32f10x_it.o"
 --strict --scatter ".\Objects\Project.sct"

@@ -1,9 +1,17 @@
+/**
+  ******************************************************************************
+  * @file    Buzzer.h
+  * @brief   蜂鸣器驱动对外接口
+  *          低电平导通（响），高电平截止（停）
+  ******************************************************************************
+  */
+
 #ifndef __Buzzer_H
 #define __Buzzer_H
 
-void Buzzer_Init(void);
-void Buzzer_ON(void);
-void Buzzer_OFF(void);
-void Buzzer_Turn(void);
+void Buzzer_Init(void);   /**< 蜂鸣器初始化（PB10推挽输出，默认不响） */
+void Buzzer_ON(void);     /**< 蜂鸣器响 */
+void Buzzer_OFF(void);    /**< 蜂鸣器停 */
+void Buzzer_Turn(void);   /**< 蜂鸣器状态翻转 */
 
 #endif

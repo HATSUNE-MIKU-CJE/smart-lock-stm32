@@ -1,37 +1,65 @@
-#include "stm32f10x.h"                  // Device header
+/**
+  ******************************************************************************
+  * @file    Buzzer.c
+  * @brief   蜂鸣器驱动（有源蜂鸣器）
+  *          控制引脚：PB10
+  *          驱动方式：GPIO推挽输出，低电平导通（响），高电平截止（停）
+  *          接线：蜂鸣器正极接VCC，负极接PB10（或通过三极管驱动）
+  ******************************************************************************
+  */
 
-#define BUZZER GPIO_Pin_10
+#include "stm32f10x.h"
 
+#define BUZZER_PIN  GPIO_Pin_10   /**< 蜂鸣器控制引脚：PB10 */
+#define BUZZER_PORT GPIOB         /**< 蜂鸣器控制端口 */
+
+/**
+  * @brief  蜂鸣器初始化
+  * @note   开启GPIOB时钟，配置PB10为推挽输出，默认输出高电平（蜂鸣器不响）
+  */
 void Buzzer_Init(void)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
-	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;//�?���?3?
-	GPIO_InitStructure.GPIO_Pin=BUZZER;
-	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB,&GPIO_InitStructure);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	
-	GPIO_SetBits(GPIOB,BUZZER);
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;    // 推挽输出：可输出高/低电平
+	GPIO_InitStructure.GPIO_Pin = BUZZER_PIN;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(BUZZER_PORT, &GPIO_InitStructure);
+	
+	// 初始状态：输出高电平，蜂鸣器不响
+	// （有源蜂鸣器低电平导通时响，高电平时停；若接法相反请改此处）
+	GPIO_SetBits(BUZZER_PORT, BUZZER_PIN);
 }
 
+/**
+  * @brief  蜂鸣器响（输出低电平导通）
+  */
 void Buzzer_ON(void)
 {
-	GPIO_ResetBits(GPIOB,BUZZER);
+	GPIO_ResetBits(BUZZER_PORT, BUZZER_PIN);
 }
 
+/**
+  * @brief  蜂鸣器停（输出高电平截止）
+  */
 void Buzzer_OFF(void)
 {
-	GPIO_SetBits(GPIOB,BUZZER);
+	GPIO_SetBits(BUZZER_PORT, BUZZER_PIN);
 }
 
+/**
+  * @brief  蜂鸣器状态翻转
+  * @note   若当前在响则停，若当前停则响。可用于简单的提示音
+  */
 void Buzzer_Turn(void)
 {
-	if (GPIO_ReadOutputDataBit(GPIOB,BUZZER)==0)
+	if (GPIO_ReadOutputDataBit(BUZZER_PORT, BUZZER_PIN) == 0)
 	{
-		GPIO_SetBits(GPIOB,BUZZER);
+		GPIO_SetBits(BUZZER_PORT, BUZZER_PIN);      // 当前在响，改为停
 	}
     else
 	{
-		GPIO_ResetBits(GPIOB,BUZZER);
+		GPIO_ResetBits(BUZZER_PORT, BUZZER_PIN);    // 当前停，改为响
 	}
 }
