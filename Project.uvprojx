@@ -333,7 +333,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--no-multibyte-chars</MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
               <IncludePath>.\Start;.\User;.\Library;.\Hardware;.\System</IncludePath>
@@ -649,20 +649,22 @@
         </Group>
         <Group>
           <GroupName>System</GroupName>
+          <Files>
+            <File>
+              <FileName>Delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\Delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>Delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\System\Delay.h</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Hardware</GroupName>
           <Files>
-            <File>
-              <FileName>Motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\Motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>Motor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\Motor.h</FilePath>
-            </File>
             <File>
               <FileName>PWM.c</FileName>
               <FileType>1</FileType>
@@ -672,6 +674,101 @@
               <FileName>PWM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\PWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>Buzzer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Buzzer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Buzzer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Buzzer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Key.c</FilePath>
+            </File>
+            <File>
+              <FileName>Key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Key.h</FilePath>
+            </File>
+            <File>
+              <FileName>OLED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\OLED.c</FilePath>
+            </File>
+            <File>
+              <FileName>OLED_Data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\OLED_Data.c</FilePath>
+            </File>
+            <File>
+              <FileName>OLED_Font.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\OLED_Font.h</FilePath>
+            </File>
+            <File>
+              <FileName>OLED.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\OLED.h</FilePath>
+            </File>
+            <File>
+              <FileName>OLED_Data.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\OLED_Data.h</FilePath>
+            </File>
+            <File>
+              <FileName>Menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>Menu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Menu.h</FilePath>
+            </File>
+            <File>
+              <FileName>FingerPrint.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\FingerPrint.c</FilePath>
+            </File>
+            <File>
+              <FileName>FingerPrint.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\FingerPrint.h</FilePath>
+            </File>
+            <File>
+              <FileName>Voice.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Voice.c</FilePath>
+            </File>
+            <File>
+              <FileName>Voice.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Voice.h</FilePath>
+            </File>
+            <File>
+              <FileName>Servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Servo.c</FilePath>
+            </File>
+            <File>
+              <FileName>Servo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Servo.h</FilePath>
+            </File>
+            <File>
+              <FileName>Password.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Password.c</FilePath>
+            </File>
+            <File>
+              <FileName>Password.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Password.h</FilePath>
             </File>
           </Files>
         </Group>

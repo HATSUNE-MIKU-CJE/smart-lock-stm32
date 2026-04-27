@@ -93,11 +93,11 @@
         {
             "name": "Target 1",
             "includePath": [
-                "d:\\STM32-Project\\smart-car-stm32\\Start",
-                "d:\\STM32-Project\\smart-car-stm32\\User",
-                "d:\\STM32-Project\\smart-car-stm32\\Library",
-                "d:\\STM32-Project\\smart-car-stm32\\Hardware",
-                "d:\\STM32-Project\\smart-car-stm32\\System",
+                "d:\\STM32-Project\\smart-lock-stm32\\Start",
+                "d:\\STM32-Project\\smart-lock-stm32\\User",
+                "d:\\STM32-Project\\smart-lock-stm32\\Library",
+                "d:\\STM32-Project\\smart-lock-stm32\\Hardware",
+                "d:\\STM32-Project\\smart-lock-stm32\\System",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw"
             ],

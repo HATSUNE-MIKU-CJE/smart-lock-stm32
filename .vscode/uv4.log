@@ -1,3 +1,3 @@
-Load "d:\\STM32-Project\\smart-car-stm32\\Objects\\Project.axf" 
+Load "d:\\STM32-Project\\smart-lock-stm32\\Objects\\Project.axf" 
 Erase Done.Programming Done.Verify OK.Application running ...
-Flash Load finished at 14:09:07
+Flash Load finished at 11:14:20
