@@ -751,16 +751,6 @@
               <FilePath>.\Hardware\Voice.h</FilePath>
             </File>
             <File>
-              <FileName>Servo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\Servo.c</FilePath>
-            </File>
-            <File>
-              <FileName>Servo.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\Servo.h</FilePath>
-            </File>
-            <File>
               <FileName>Password.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\Password.c</FilePath>
@@ -769,6 +759,26 @@
               <FileName>Password.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\Password.h</FilePath>
+            </File>
+            <File>
+              <FileName>Switch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Switch.c</FilePath>
+            </File>
+            <File>
+              <FileName>Switch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Switch.h</FilePath>
+            </File>
+            <File>
+              <FileName>Motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>Motor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Motor.h</FilePath>
             </File>
           </Files>
         </Group>

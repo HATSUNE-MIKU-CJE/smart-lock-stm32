@@ -52,7 +52,7 @@ typedef struct {
   */
 const KeyHardware_t key_table[12] = {
     {GPIOA, GPIO_Pin_1,  1},            // [0] 数字1
-    {GPIOB, GPIO_Pin_11, 2},            // [1] 数字2
+    {GPIOA, GPIO_Pin_2,  2},            // [1] 数字2
     {GPIOA, GPIO_Pin_3,  3},            // [2] 数字3（原PA2冲突，改为PA3）
     {GPIOA, GPIO_Pin_4,  4},            // [3] 数字4
     {GPIOA, GPIO_Pin_5,  5},            // [4] 数字5
@@ -60,9 +60,9 @@ const KeyHardware_t key_table[12] = {
     {GPIOA, GPIO_Pin_7,  7},            // [6] 数字7
     {GPIOB, GPIO_Pin_0,  8},            // [7] 数字8
     {GPIOB, GPIO_Pin_1,  9},            // [8] 数字9
-    {GPIOB, GPIO_Pin_11, 0},            // [9] 数字0
-    {GPIOA, GPIO_Pin_0,  KEY_CONFIRM},  // [10] 确认键
-    {GPIOB, GPIO_Pin_13, KEY_BACK},     // [11] 返回键（原PB10冲突，改为PB12）
+    {GPIOB, GPIO_Pin_14, 0},            // [9] 数字0（PB14）
+    {GPIOA, GPIO_Pin_0,  KEY_CONFIRM},  // [10] 确认键（PA0）
+    {GPIOB, GPIO_Pin_11, KEY_BACK},     // [11] 返回键（PB11）
 };
 
 /**

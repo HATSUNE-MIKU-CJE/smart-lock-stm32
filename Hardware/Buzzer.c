@@ -9,6 +9,8 @@
   */
 
 #include "stm32f10x.h"
+#include "Buzzer.h"
+#include "Delay.h"
 
 #define BUZZER_PIN  GPIO_Pin_10   /**< 蜂鸣器控制引脚：PB10 */
 #define BUZZER_PORT GPIOB         /**< 蜂鸣器控制端口 */
@@ -62,4 +64,59 @@ void Buzzer_Turn(void)
 	{
 		GPIO_ResetBits(BUZZER_PORT, BUZZER_PIN);    // 当前停，改为响
 	}
+}
+
+/*================== 提示音封装函数 ==================*/
+
+/**
+  * @brief  按键反馈音（短叫一声）
+  * @note   每次按下任意按键时调用，给用户触觉反馈
+  */
+void Buzzer_KeyPress(void)
+{
+	Buzzer_ON();
+	Delay_ms(50);   // 短鸣50ms
+	Buzzer_OFF();
+}
+
+/**
+  * @brief  开锁成功提示音（短-长-短 三声）
+  * @note   节奏：嘀(30ms)-嗒(200ms)-嘀(30ms)
+  */
+void Buzzer_Unlock(void)
+{
+	Buzzer_ON();  Delay_ms(50);  Buzzer_OFF();  Delay_ms(70);
+	Buzzer_ON();  Delay_ms(200); Buzzer_OFF();  Delay_ms(70);
+	Buzzer_ON();  Delay_ms(50);  Buzzer_OFF();
+}
+
+/**
+  * @brief  密码错误提示音（短叫两声）
+  * @note   节奏：嘀(50ms)-嘀(50ms)
+  */
+void Buzzer_Error(void)
+{
+	Buzzer_ON();  Delay_ms(50);  Buzzer_OFF();  Delay_ms(70);
+	Buzzer_ON();  Delay_ms(50);  Buzzer_OFF();
+}
+
+/**
+  * @brief  关锁完成提示音（短-短-长 三声）
+  * @note   节奏：嘀(30ms)-嘀(30ms)-嗒(200ms)
+  */
+void Buzzer_Lock(void)
+{
+	Buzzer_ON();  Delay_ms(50);  Buzzer_OFF();  Delay_ms(70);
+	Buzzer_ON();  Delay_ms(50);  Buzzer_OFF();  Delay_ms(70);
+	Buzzer_ON();  Delay_ms(200); Buzzer_OFF();
+}
+
+/**
+  * @brief  退格提示音（中鸣一声）
+  * @note   节奏：嘀(100ms)，比按键音(50ms)长，比错误音短
+  *         用于密码输入时的退格操作反馈，声音与按键音区分
+  */
+void Buzzer_Backspace(void)
+{
+    Buzzer_ON();  Delay_ms(100);  Buzzer_OFF();  
 }
