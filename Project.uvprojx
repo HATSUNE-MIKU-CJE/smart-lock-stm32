@@ -721,36 +721,6 @@
               <FilePath>.\Hardware\OLED_Data.h</FilePath>
             </File>
             <File>
-              <FileName>Menu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\Menu.c</FilePath>
-            </File>
-            <File>
-              <FileName>Menu.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\Menu.h</FilePath>
-            </File>
-            <File>
-              <FileName>FingerPrint.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\FingerPrint.c</FilePath>
-            </File>
-            <File>
-              <FileName>FingerPrint.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\FingerPrint.h</FilePath>
-            </File>
-            <File>
-              <FileName>Voice.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\Voice.c</FilePath>
-            </File>
-            <File>
-              <FileName>Voice.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\Voice.h</FilePath>
-            </File>
-            <File>
               <FileName>Password.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\Password.c</FilePath>
@@ -779,6 +749,36 @@
               <FileName>Motor.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\Motor.h</FilePath>
+            </File>
+            <File>
+              <FileName>Store.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Store.c</FilePath>
+            </File>
+            <File>
+              <FileName>Store.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Store.h</FilePath>
+            </File>
+            <File>
+              <FileName>Config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Config.c</FilePath>
+            </File>
+            <File>
+              <FileName>Config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Config.h</FilePath>
+            </File>
+            <File>
+              <FileName>Unlock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Unlock.c</FilePath>
+            </File>
+            <File>
+              <FileName>Unlock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Unlock.h</FilePath>
             </File>
           </Files>
         </Group>

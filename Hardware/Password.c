@@ -19,7 +19,7 @@
   * @note   当前为硬编码的6位密码：123456
   *         后续若支持修改密码，可从Flash读取或提供设置接口
   */
-static uint8_t s_password[6] = {1, 2, 3, 4, 5, 6};
+static uint8_t s_password[6];
 
 /**
   * @brief  用户输入缓存数组
@@ -121,4 +121,27 @@ void Password_Remove(void)
     {
         s_len--;  // 长度减1，最后一位被逻辑删除
     }
+}
+
+void Password_SetPassword(const uint8_t* pwd)
+{
+  for (uint8_t i=0;i<6;i++)
+  {
+    s_password[i]=pwd[i];
+  }
+}
+
+const uint8_t* Password_GetPassword(void)
+{
+  return s_password;
+}
+
+/**
+  * @brief  获取当前输入缓存数组指针
+  * @retval 指向 s_input 数组的常量指针（有效长度由 Password_GetInputLen 决定）
+  * @note   主要用于配置模式：输满6位后，主函数通过此接口读取输入的密码
+  */
+const uint8_t* Password_GetInputArray(void)
+{
+    return s_input;
 }

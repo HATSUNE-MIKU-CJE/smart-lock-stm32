@@ -17,5 +17,8 @@ uint8_t Password_Check(void);               /**< 验证密码，正确返回1，
 void Password_Reset(void);                  /**< 清空当前输入缓存 */
 uint8_t Password_GetInputLen(void);         /**< 获取当前输入长度（0~6） */
 void Password_Remove(void);                 /**< 退格删除最后一位输入 */
+void Password_SetPassword(const uint8_t* pwd);
+const uint8_t* Password_GetPassword(void);
+const uint8_t* Password_GetInputArray(void);  /**< 获取当前输入缓存数组指针（6字节），用于配置模式保存新密码 */
 
 #endif
