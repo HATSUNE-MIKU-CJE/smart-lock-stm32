@@ -685,14 +685,91 @@ while (1) {
 | 按键没反应 | 按了键盘没反应 | 矩阵键盘行列线接错 / 扫描后没延时电平不稳 | 用万用表测行列关系，扫描后加Delay_us(10) |
 | 密码断电丢失 | 重启后密码恢复123456 | 没调Storage_Init / Flash写入失败 | 确认stm32f10x_flash.h已包含，Storage_Init在Password_Init之前调用 |
 
+## 阶段11：低功耗——PWR停止模式
+
+### 做了什么
+
+IDLE状态下3分钟无操作，系统自动进入 **Stop模式**，功耗从几十mA降到几十μA。只有按 `*` 键才能唤醒，其他键按了继续睡（软件过滤）。
+
+**为什么选Stop而不是Sleep或Standby？**
+
+| 模式 | CPU | 时钟 | SRAM | 唤醒 | 功耗 |
+|------|-----|------|------|------|------|
+| Sleep | 停 | 外设继续跑 | 保留 | 任意中断 | ~10mA |
+| **Stop** | **停** | **全停** | **保留** | **EXTI中断** | **~30~50μA** |
+| Standby | 断电 | 全停 | **丢失** | 复位 | ~2~5μA |
+
+> Stop是sweet spot：功耗降三个数量级，SRAM数据全在（密码不丢），EXTI按键唤醒。
+
+**唤醒机制**：
+1. 矩阵键盘的3根列线（PA4~PA6）配置为EXTI下降沿中断
+2. 任意键按下都会触发EXTI，唤醒CPU
+3. 唤醒后`SystemInit()`恢复72MHz时钟
+4. 矩阵扫描确认是不是*键，不是就继续睡
+
+**为什么用"软件过滤"而不是硬件精确唤醒？**
+
+矩阵键盘的行列共享特性决定了：单独检测*键需要额外飞线。务实的做法是列线全部配EXTI，醒来扫一眼，不是*键翻个身继续睡。整个过程不到1ms，用户无感知。
+
+### 技术栈
+
+- PWR停止模式（`PWR_EnterSTOPMode`）
+- EXTI外部中断（AFIO映射 + NVIC配置）
+- `SystemInit()`时钟恢复
+- 内层while循环软件过滤
+
+### 关键代码
+
+```c
+// 进入Stop模式（WFI = Wait For Interrupt）
+PWR_EnterSTOPMode(PWR_Regulator_ON, PWR_STOPEntry_WFI);
+
+// ========== 唤醒后从这里继续 ==========
+SystemInit();        // 恢复72MHz（Stop关闭了HSE/PLL）
+Delay_ms(20);        // 等时钟稳定 + 按键消抖
+
+Key_Scan();
+if (Key_GetEvent() == KEY_CONFIRM)  // 是*键？
+    break;          // 退出内层循环，正常开机
+// 不是*键，继续睡（内层while循环）
+```
+
+**状态切换检测（防止漏重置计时）**：
+
+```c
+// 在while(1)开头，switch之前
+if (g_state != g_lastState)
+{
+    if (g_state == STATE_IDLE)
+        g_idleTick = GetTick();  // 刚进入IDLE，重置超时计时
+    g_lastState = g_state;
+}
+```
+
+### 拓展思考
+
+**Q：为什么唤醒后必须调SystemInit()？**
+> Stop模式下HSE（外部晶振）和PLL（锁相环）都被关了。唤醒后默认用内部HSI（8MHz）跑，不调SystemInit()的话系统慢得像蜗牛，TIM4时基也不对。
+
+**Q：Stop期间TIM4停了，systick_counter还准吗？**
+> Stop期间TIM4不计数，systick_counter暂停。唤醒后TIM4继续从停下来的地方计数，时间差计算是正确的。因为debounce_time记录的是暂停前的值，唤醒后继续累加。
+
+**Q：电机正在转的时候能进Stop吗？**
+> 不能，而且代码里也不会。Stop只在STATE_IDLE时判断，而STATE_IDLE意味着开锁流程已经结束（Unlock_IsBusy()为0）。电机转的时候主循环在等Switch_IsClosed()或等延时，不会走到STATE_IDLE。
+
+**Q：3分钟会不会太长/太短？**
+> 测试时用20秒，正式用3分钟。太短了用户输个密码要慌，太长了电池耗得快。3分钟是个合理的折中——正常人站在锁前不会愣3分钟不操作。
+
+---
+
 ## 附录B：待办事项
 
 - [x] 密码掉电保存
 - [x] 配置模式改密码
 - [x] 矩阵键盘替换独立按键
+- [x] 低功耗睡眠模式（PWR）
 - [ ] 指纹模块（AS608）
 - [ ] 语音播报
-- [ ] 低功耗睡眠模式（PWR）
 - [ ] 蓝牙/WiFi远程开锁
 
 ---

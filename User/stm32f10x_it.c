@@ -136,6 +136,37 @@ void SysTick_Handler(void)
 {
 }
 
+/**
+  * @brief  EXTI4中断服务函数（PA4列线唤醒）
+  * @note   矩阵键盘列线C0（PA4）的下降沿中断。
+  *         在Stop模式下，该中断事件会唤醒CPU。中断内只做清标志，
+  *         唤醒后的按键扫描和过滤由主循环负责。
+  */
+void EXTI4_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line4) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line4);
+    }
+}
+
+/**
+  * @brief  EXTI9_5中断服务函数（PA5、PA6列线唤醒）
+  * @note   矩阵键盘列线C1（PA5）和C2（PA6）共享此中断向量。
+  *         在Stop模式下，下降沿事件会唤醒CPU。中断内只做清标志。
+  */
+void EXTI9_5_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line5);
+    }
+    if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line6);
+    }
+}
+
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */

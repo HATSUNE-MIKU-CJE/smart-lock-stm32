@@ -209,6 +209,40 @@ void Key_Init(void)
         key_runtime[i].last_level = 1;      /* 默认高电平（未按） */
         key_runtime[i].debounce_time = 0;
     }
+    
+    /*================== 新增：EXTI外部中断配置（用于Stop模式唤醒） ==================*/
+    /*
+     *  把矩阵键盘的3根列线（PA4~PA6）配置为EXTI下降沿中断源。
+     *  在Stop模式下，任意按键按下都会拉低对应列线，触发EXTI唤醒CPU。
+     *  唤醒后由主循环做矩阵扫描和软件过滤（只认*键）。
+     */
+    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+    
+    /* EXTI线映射到PA4~PA6 */
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource4);
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource5);
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource6);
+    
+    /* EXTI配置：下降沿触发中断 */
+    EXTI_InitTypeDef EXTI_InitStruct;
+    EXTI_InitStruct.EXTI_Line = EXTI_Line4 | EXTI_Line5 | EXTI_Line6;
+    EXTI_InitStruct.EXTI_LineCmd = ENABLE;
+    EXTI_InitStruct.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Falling;
+    EXTI_Init(&EXTI_InitStruct);
+    
+    /* NVIC配置：EXTI4独立向量，EXTI5~6共享EXTI9_5向量 */
+    NVIC_InitTypeDef NVIC_InitStruct;
+    NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 2;
+    NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+    
+    NVIC_InitStruct.NVIC_IRQChannel = EXTI4_IRQn;
+    NVIC_Init(&NVIC_InitStruct);
+    
+    NVIC_InitStruct.NVIC_IRQChannel = EXTI9_5_IRQn;
+    NVIC_Init(&NVIC_InitStruct);
 }
 
 /**

@@ -78,7 +78,7 @@ void Unlock_Tick(void)
                 s_phase = PHASE_UNLOCKED;
                 
                 OLED_Clear();
-                OLED_ShowString(0, 0, "OPEN", OLED_8X16);
+                OLED_ShowString(0, 0, "已开锁", OLED_8X16);
                 OLED_Update();
             }
             break;
@@ -99,7 +99,7 @@ void Unlock_Tick(void)
                 s_phase = PHASE_IDLE;
                 
                 OLED_Clear();
-                OLED_ShowString(0, 0, "CLOSED", OLED_8X16);
+                OLED_ShowString(0, 0, "已关锁", OLED_8X16);
                 OLED_Update();
                 Buzzer_Lock();
             }

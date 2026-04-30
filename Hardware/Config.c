@@ -70,7 +70,7 @@ void Config_Start(void)
     s_tick = GetTick();
     
     OLED_Clear();
-    OLED_ShowString(0, 0, "Old Pwd:", OLED_8X16);
+    OLED_ShowString(0, 0, "原始密码:", OLED_8X16);
     OLED_Update();
     
     Password_Reset();
@@ -121,7 +121,7 @@ void Config_HandleEvent(uint8_t evt)
             {
                 Password_Reset();
                 OLED_Clear();
-                OLED_ShowString(0, 0, "New Pwd:", OLED_8X16);
+                OLED_ShowString(0, 0, "新密码:", OLED_8X16);
                 OLED_Update();
                 s_tick = GetTick();
                 s_phase = CFG_PHASE_SET;
@@ -131,7 +131,7 @@ void Config_HandleEvent(uint8_t evt)
                 Password_Reset();
                 Buzzer_Error();
                 OLED_Clear();
-                OLED_ShowString(0, 0, "ERROR", OLED_8X16);
+                OLED_ShowString(0, 0, "密码错误", OLED_8X16);
                 OLED_Update();
                 Delay_ms(800);
                 ExitConfig();
@@ -174,7 +174,7 @@ void Config_HandleEvent(uint8_t evt)
                 
                 Password_Reset();
                 OLED_Clear();
-                OLED_ShowString(0, 0, "Confirm:", OLED_8X16);
+                OLED_ShowString(0, 0, "确认密码:", OLED_8X16);
                 OLED_Update();
                 s_tick = GetTick();
                 s_phase = CFG_PHASE_CONFIRM;
@@ -229,7 +229,7 @@ void Config_HandleEvent(uint8_t evt)
                     Password_SetPassword(s_newPwd);
                     Buzzer_Unlock();  /* 用开锁成功音表示保存成功 */
                     OLED_Clear();
-                    OLED_ShowString(0, 0, "Saved", OLED_8X16);
+                    OLED_ShowString(0, 0, "已保存", OLED_8X16);
                     OLED_Update();
                 }
                 else
@@ -237,7 +237,7 @@ void Config_HandleEvent(uint8_t evt)
                     /* 两次不一致 */
                     Buzzer_Error();
                     OLED_Clear();
-                    OLED_ShowString(0, 0, "Mismatch", OLED_8X16);
+                    OLED_ShowString(0, 0, "密码不一致", OLED_8X16);
                     OLED_Update();
                 }
                 
